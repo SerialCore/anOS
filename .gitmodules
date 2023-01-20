@@ -1,0 +1,3 @@
+[submodule "tools/ghash"]
+	path = tools/ghash
+	url = https://github.com/SerialCore/ghash.git
