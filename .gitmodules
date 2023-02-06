@@ -1,3 +1,6 @@
 [submodule "tools/ghash"]
 	path = tools/ghash
 	url = https://github.com/SerialCore/ghash.git
+[submodule "tools/genecode"]
+	path = tools/genecode
+	url = https://github.com/SerialCore/genecode.git
