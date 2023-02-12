@@ -10,6 +10,7 @@
 
 # log file
 *.log
+*.ini
 
 # visual studio code
 .vscode/
