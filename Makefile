@@ -33,3 +33,4 @@ $(BUILD_DIR):
 
 clean:
 	rm -r $(BUILD_DIR)
+	make clean -C $(KERNEL_DIR)
