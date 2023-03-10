@@ -1,14 +1,22 @@
-#include "printk.h"
+#include "lib.h"
+#include "frame.h"
+#include "kprintf.h"
+#include "console.h"
 
 void Start_Kernel(void)
 {
-	set_frame_resolution(1440, 900);
-	set_frame_position(0, 0);
-	set_frame_charsize(8, 16);
-	set_framebuffer_address((int*)0xffff800000a00000);
-	set_framebuffer_length(1440 * 900 * 4);
+	framebuffer_init();
 
-	frame_print_string("\nHello\tWorld!\n", Yellow, BLACK);
+	console_init();
+
+	kprintf_color32_string("\n[===] anOS (an operating system) preaches:\n", Yellow, Black);
+	kprintf_color32_string("\nInspired by human science and religion, we are aiming to create a brand new conscious framework without taking any simulation of existing creatures.\n", Yellow, Black);
+	kprintf_color32_string("\nLike that's all of the approprate conditions make fire alive.\n\n", Yellow, Black);
+
+	console_write("Begin:\n\n");
+	console_newline();
+
+	kprintf("sizeof(int)= %d * 8", sizeof(int));
 
     while(1)
         ;

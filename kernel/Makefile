@@ -10,7 +10,7 @@ all: $(ELF)
 	objcopy -I elf64-x86-64 -S -R ".eh_frame" -R ".comment" $< -O binary $(KERNEL)
 	objdump -D -x $< > $(LIST)
 
-$(ELF): head.o main.o printk.o
+$(ELF): head.o main.o kprintf.o frame.o console.o
 	ld -b elf64-x86-64 $^ -Map $(MAP) -o $@ -T $(LINKER)
 
 head.o: head.S
@@ -20,7 +20,13 @@ head.o: head.S
 main.o: main.c
 	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
 
-printk.o: printk.c
+kprintf.o: kprintf.c
+	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
+
+frame.o: frame.c
+	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
+
+console.o: console.c
 	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
 
 clean:

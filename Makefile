@@ -4,7 +4,7 @@ KERNEL_DIR=kernel/
 
 .PHONY:
 
-Bochs: $(BUILD_DIR) Compile
+bochs: $(BUILD_DIR) compile
 	bximage -func=create -fd=1.44M -imgmode=flat -sectsize=512 -q $(BUILD_DIR)bootloader.img
 	#bximage -func=create -hd=10M -imgmode=flat -sectsize=512 -q $(BUILD_DIR)bootloader.img
 	@echo "============================"
@@ -24,7 +24,7 @@ Bochs: $(BUILD_DIR) Compile
 
 	bochs -qf .bochsrc
 
-Compile: $(BUILD_DIR)
+compile: $(BUILD_DIR)
 	make -C $(BOOT_DIR)
 	make -C $(KERNEL_DIR)
 

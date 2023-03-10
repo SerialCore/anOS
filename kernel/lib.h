@@ -16,6 +16,59 @@
 #define nop() 		            __asm__ __volatile__ ("nop	\n\t")
 #define io_mfence() 	        __asm__ __volatile__ ("mfence	\n\t":::"memory")
 
+
+typedef enum color32_enum
+{
+    White           = 0x00FFFFFF,
+    Black           = 0x00000000,
+    SilveryWhite    = 0x00D1C9D3,
+    Gray            = 0x00A7A9AC,
+    DeepGray        = 0x00808285,
+    DeeperGray      = 0x0058595B,
+
+    Magenta         = 0x00B31564,
+    Red             = 0x00E61B1B,
+    RedOrange       = 0x00FF5500,
+    Orange          = 0x00FFAA00,
+    Gold            = 0x00FFCE00,
+    Yellow          = 0x00FFE600,
+
+    GrassGreen      = 0x00A2E61B,
+    Green           = 0x0026E600,
+    DeepGreen       = 0x00008055,
+    Cyan            = 0x0000AACC,
+    Blue            = 0x00004CE6,
+    IndigoBlue      = 0x003D00B8,
+
+    Violet          = 0x006600CC,
+    Purple          = 0x00600080,
+    Beige           = 0x00FCE6C9,
+    LightBrown      = 0x00BB9167,
+    Brown           = 0x008E562E,
+    DeepBrown       = 0x00613D30,
+
+    LightPink       = 0x00FF80FF,
+    PinkOrange      = 0x00FFC680,
+    PinkYellow      = 0x00FFFF80,
+    PinkGreen       = 0x0080FF9E,
+    PinkBlue        = 0x0080D6FF,
+    PinkPurple      = 0x00BCB3FF,
+}color32_enum_t;
+
+typedef struct color32
+{
+    unsigned char T;
+    unsigned char R;
+    unsigned char G;
+    unsigned char B;
+}color32_t;
+
+inline unsigned int get_color32(color32_t color)
+{
+	return (color.T << 24) + (color.R << 16) + (color.G << 8) + color.B;
+}
+
+
 ///------------------------------------------
 /// List operation
 ///------------------------------------------
@@ -288,6 +341,7 @@ inline int strncmp(char* FirstPart, char* SecondPart, long Count)
 	return __res;
 }
 
+// undefined reference to `strlen' / multiple declaration of `strlen' when inline
 inline int strlen(char* String)
 {
 	register int __res;
