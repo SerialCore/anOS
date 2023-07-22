@@ -351,7 +351,7 @@ int vsprintf(char* buffer, const char* format, va_list args)
 					s = va_arg(args,char *);
 					if (!s)
 						s = '\0';
-					len = str_len(s);
+					len = strlen(s);
 					if (precision < 0)
 						precision = len;
 					else if (len > precision)
@@ -432,19 +432,4 @@ int vsprintf(char* buffer, const char* format, va_list args)
 
 	*str = '\0';
 	return str - buffer;
-}
-
-int str_len(char* String)
-{
-	register int __res;
-	__asm__	__volatile__ (	"cld	\n\t"
-					        "repne	\n\t"
-					        "scasb	\n\t"
-					        "notl	%0	\n\t"
-					        "decl	%0	\n\t"
-					        :"=c"(__res)
-					        :"D"(String),"a"(0),"0"(0xffffffff)
-					        :
-				        );
-	return __res;
 }

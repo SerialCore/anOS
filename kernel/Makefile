@@ -6,6 +6,8 @@ LIST=kernel.list
 MAP=kernel.map
 LINKER=Kernel.lds
 
+CFLAGS = -I. -I $(INCLUDE_DIR) -mcmodel=large -fno-builtin -m64
+
 all: $(ELF)
 	objcopy -I elf64-x86-64 -S -R ".eh_frame" -R ".comment" $< -O binary $(KERNEL)
 	objdump -D -x $< > $(LIST)
@@ -18,16 +20,16 @@ head.o: head.S
 	as --64 -o $@ head.s
 
 main.o: main.c
-	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 
 kprintf.o: kprintf.c
-	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 
 frame.o: frame.c
-	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 
 console.o: console.c
-	gcc -mcmodel=large -fno-builtin -m64 -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 
 clean:
 	rm *.o $(ELF) $(LIST) $(MAP)

@@ -462,7 +462,8 @@ Label_SVGA_Mode_Info_Finish:
 ;============== set the SVGA mode(VESA VBE)
 
     mov             ax,     4f02h
-    mov             bx,     4180h                       ; mode0x180, 1440 rows, 900 cols, addr=e0000000h, width=32bit
+    mov             bx,     4180h                       ; mode0x180, 1440 rows, 900 cols, 32 bits addr=e0000000h, width=32bit
+                                                        ; mode0x143, 800 rows, 600 cols, 32 bits addr=e0000000h, width=32bit
     int             10h
 
     cmp             ax,     004fh
